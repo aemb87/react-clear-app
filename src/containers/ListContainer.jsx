@@ -2,6 +2,10 @@ import React from 'react';
 import ListItemContainer from './ListItemContainer';
 
 export default class ListContainer extends React.Component {
+	constructor() {
+		super();
+		this.getItemColor = this.getItemColor.bind(this);
+	}
 
 	getItemColor (itemIdx) {
 		var baseH = 212,
@@ -42,14 +46,13 @@ export default class ListContainer extends React.Component {
 	render() {
 
 		const listItems = [...this.props.items].map((item, index) => {
-			const itemStyle = getItemColor(index)
+			const itemStyle = this.getItemColor(index)
 			return (
 				<ListItemContainer 
 					key={index} 
 					itemStyle={itemStyle} 
 					item={item} 
 					idx={index} 
-					total={this.props.items.length}
 				>
 				</ListItemContainer>
 			)

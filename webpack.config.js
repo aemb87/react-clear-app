@@ -11,12 +11,13 @@ module.exports = {
     },
     module: {
         rules: [{
-            test: /\.jsx$/,
+            test: /\.jsx?$/,
             exclude: /node_modules/,
-            use: ['babel-loader'],
+            loader: ['babel-loader'],
         },],
     },
     resolve: {
+        extensions: ['.js', '.jsx'],
         modules: [
             path.join(__dirname, 'node_modules'),
         ],

@@ -1,66 +1,36 @@
 import React from 'react';
 
-var baseH = 212,
-    baseS = 93,
-    baseL = 53,
-
-    stepH = -2.5,
-    stepS = 1,
-    stepL = 2.5,
-
-    maxColorSpan = 5,
-
-    spanH = maxColorSpan * stepH,
-    spanS = maxColorSpan * stepS,
-    spanL = maxColorSpan * stepL;
-
-
 export default class ListItem extends React.Component {
-	constructor() {
-		super();
-
-		this.handleClick = this.handleClick.bind(this);
-	}
-
-	handleClick(e) {
-		e.preventDefault();
-	}
-
 	render() {
-
-		var o = this.props.idx,
-            n = this.props.total,
-            sH = stepH,
-            sS = stepS,
-            sL = stepL;
-
-        if (n > maxColorSpan) {
-            sH = spanH / n;
-            sS = spanS / n;
-            sL = spanL / n;
-        }
-
-        const itemStyle = {
-        	backgroundColor : 'hsl('
-	            + (baseH + o * sH) + ','
-	            + Math.min(100, (baseS + o * sS)) + '%,'
-	            + Math.min(100, (baseL + o * sL)) + '%)'
-	        };
-
 		return (
-			<li className="item" onClick={this.handleClick}>
-				<div className="inner" style={itemStyle}>
-					<span className="title">
+			<li className="item" onClick={this.props.onClick}>
+				<div className="inner" style={this.props.itemStyle}>
+					<span className="title" onClick={this.props.onTitleClick}>
 						<span className="text">
 							{this.props.item.name}
 						</span>
 					</span>
-					<div className="count">
-						{this.props.item.items.length}
-					</div>
-					<input className="field" type="text" value={this.props.item.name} />
+					<ItemChildrenCount children={this.props.item.children} showCount={this.props.showCount}/>			
+					<input className="field" type="text" value={this.props.item.name} onChange={this.props.onChange}/>
 				</div>
 			</li>
 		);
 	}
 };
+
+ListItem.defaultProps = {
+	showCount: true,
+};
+
+function ItemChildrenCount (props) {
+	if (!props.showCount) 
+		return null;
+	
+	const childrenCount = props.children ? props.children.length : 0;
+
+	return (
+		<div className="count">
+			{childrenCount}
+		</div>
+	);
+}
