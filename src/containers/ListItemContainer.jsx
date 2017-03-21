@@ -6,7 +6,7 @@ export default class ListItemContainer extends React.Component {
 		super();
 		this.handleClick = this.handleClick.bind(this);
 		this.handleTitleClick = this.handleTitleClick.bind(this);
-		this.handleOnChange = this.handleOnChange.bind(this);
+		this.handleOnBlur = this.handleOnBlur.bind(this);
 
 		this.state = {
 			isEditing: false
@@ -25,9 +25,12 @@ export default class ListItemContainer extends React.Component {
 		});
 	}
 
-	handleOnChange(e) {
+	handleOnBlur(e) {
 		e.stopPropagation();
 		this.props.actions.updateList(this.props.item.get('id'), e.target.value);
+		this.setState({
+			isEditing: false
+		});
 	}
 
 	render() {
@@ -37,7 +40,7 @@ export default class ListItemContainer extends React.Component {
 				isEditing={this.state.isEditing} 
 				onClick={this.handleClick} 
 				onTitleClick={this.handleTitleClick} 
-				onChange={this.handleOnChange} 
+				onBlur={this.handleOnBlur} 
 				itemStyle={this.props.itemStyle}
 				item={this.props.item}
 			>

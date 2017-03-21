@@ -1,6 +1,12 @@
 import React from 'react';
 
 export default class ListItem extends React.Component {
+	componentDidUpdate() {
+		if (this.props.isEditing) {
+			this.textInput.focus();
+		}
+	}
+
 	render() {
 		const itemClass = this.props.isEditing ? 'item edit' : 'item';
 
@@ -14,12 +20,13 @@ export default class ListItem extends React.Component {
 					</span>
 					<ItemChildrenCount children={this.props.item.get('children')} showCount={this.props.showCount}/>			
 					<input 
+						name=""
 						className="field" 
 						type="text" 
-						value={this.props.item.get('name')} 
-						onChange={this.props.onChange}
+						defaultValue={this.props.item.get('name')} 
+						onBlur={this.props.onBlur}
 						onClick={(e) => {e.stopPropagation();}}
-						autoFocus={this.props.isEditing}
+						ref={(input) => { this.textInput = input; }}
 					/>
 				</div>
 			</li>
