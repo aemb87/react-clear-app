@@ -53,6 +53,7 @@ export default class ListContainer extends React.Component {
 					itemStyle={itemStyle} 
 					item={item} 
 					idx={index} 
+					actions={this.props.actions}
 				>
 				</ListItemContainer>
 			)
@@ -66,5 +67,3 @@ export default class ListContainer extends React.Component {
 		);
 	}
 };
-
-
