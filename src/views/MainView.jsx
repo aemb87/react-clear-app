@@ -6,7 +6,9 @@ import { addList, updateList, deleteList } from '../reducers/Actions';
 
 const mapStateToProps = (state) => {
 	return {
-    	items: state.get('lists')
+    	items: state.get('lists').filter(function(item) {
+    		return item.get('completed') === false
+    	})
   	};
 };
 

@@ -15,7 +15,7 @@ export default class ListItemContainer extends React.Component {
 
 	handleClick(e) {
 		e.stopPropagation();
-		console.log('open list');
+		history.push('/' + this.props.item.get('id'));
 	}
 
 	handleTitleClick(e) {
@@ -26,11 +26,22 @@ export default class ListItemContainer extends React.Component {
 	}
 
 	handleOnBlur(e) {
-		e.stopPropagation();
-		this.props.actions.updateList(this.props.item.get('id'), e.target.value);
+		if (e.target.value)
+			this.props.actions.updateList(this.props.item.get('id'), e.target.value);
+		else
+			this.props.actions.deleteList(this.props.item.get('id'));
+
 		this.setState({
 			isEditing: false
 		});
+	}
+
+	handleSlideRight() {
+		this.props.actions.completeList(this.props.item.get('id'));
+	}
+
+	handleSlideLeft() {
+		this.props.actions.deleteList(this.props.item.get('id'));
 	}
 
 	render() {
