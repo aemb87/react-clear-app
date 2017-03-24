@@ -7,27 +7,39 @@ export default class ListItem extends React.Component {
 		}
 	}
 
-	render() {
-		const itemClass = this.props.isEditing ? 'item edit' : 'item';
+	getItemClass() {
+		let itemClass = ["item", "list-item"];
+		
+		if (this.props.isEditing)
+			itemClass.push("edit");
+		
+		if (!this.props.children || this.props.children.length === 0)
+			itemClass.push("empty");
 
+		return itemClass.join(" ");
+	}
+
+	render() {
 		return (
-			<li className={itemClass} onClick={this.props.onClick}>
-				<div className="inner" style={this.props.itemStyle}>
-					<span className="title" onClick={this.props.onTitleClick}>
-						<span className="text">
-							{this.props.item.get('name')}
+			<li className={this.getItemClass()} onClick={this.props.onClick}>
+				<div className="slider" style={this.props.itemStyle}>
+					<div className="inner">
+						<span className="title" onClick={this.props.onTitleClick}>
+							<span className="text">
+								{this.props.item.get('name')}
+							</span>
 						</span>
-					</span>
-					<ItemChildrenCount children={this.props.item.get('children')} showCount={this.props.showCount}/>			
-					<input 
-						name=""
-						className="field" 
-						type="text" 
-						defaultValue={this.props.item.get('name')} 
-						onBlur={this.props.onBlur}
-						onClick={(e) => {e.stopPropagation();}}
-						ref={(input) => { this.textInput = input; }}
-					/>
+						<ItemChildrenCount children={this.props.item.get('children')} showCount={this.props.showCount}/>			
+						<input 
+							name=""
+							className="field" 
+							type="text" 
+							defaultValue={this.props.item.get('name')} 
+							onBlur={this.props.onBlur}
+							onClick={(e) => {e.stopPropagation();}}
+							ref={(input) => {this.textInput = input;}}
+						/>
+					</div>
 				</div>
 			</li>
 		);

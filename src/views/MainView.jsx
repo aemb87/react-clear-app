@@ -8,7 +8,7 @@ const mapStateToProps = (state) => {
 	return {
     	items: state.get('lists').filter(function(item) {
     		return item.get('completed') === false
-    	})
+    	}).reverse()
   	};
 };
 
