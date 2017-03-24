@@ -2,7 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 import ListContainer from '../containers/ListContainer';
-import { addList, updateList, deleteList } from '../reducers/Actions';
+import { addList, updateList, completeList, deleteList } from '../reducers/Actions';
 
 const mapStateToProps = (state) => {
 	return {
@@ -13,7 +13,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-	actions: bindActionCreators({ addList, updateList, deleteList }, dispatch)
+	actions: bindActionCreators({ addList, updateList, completeList, deleteList }, dispatch)
 });
 
 const MainView = connect(mapStateToProps, mapDispatchToProps)(ListContainer);
