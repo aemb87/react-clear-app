@@ -19,6 +19,19 @@ export default class ListItem extends React.Component {
 		return itemClass.join(" ");
 	}
 
+	renderItemCount() {
+		if (!this.props.showCount) 
+			return "";
+	
+		const childrenCount = this.props.children ? this.props.children.length : 0;
+
+		return (
+			<div className="count">
+				{childrenCount}
+			</div>
+		);
+	}
+
 	render() {
 		return (
 			<div className={this.getItemClass()} onClick={this.props.onClick}>
@@ -29,9 +42,9 @@ export default class ListItem extends React.Component {
 								{this.props.item.get('name')}
 							</span>
 						</span>
-						<ItemChildrenCount children={this.props.item.get('children')} showCount={this.props.showCount}/>			
+						{this.renderItemCount()}
 						<input 
-							name=""
+							name={"list-item-" + (this.props.item.get('id'))}
 							className="field" 
 							type="text" 
 							defaultValue={this.props.item.get('name')} 
@@ -48,19 +61,15 @@ export default class ListItem extends React.Component {
 	}
 };
 
-ListItem.defaultProps = {
-	showCount: true,
+ListItem.propTypes = {
+	isEditing: React.PropTypes.bool.isRequired,
+	onClick: React.PropTypes.func.isRequired,
+	onTitleClick: React.PropTypes.func.isRequired,
+	onBlur: React.PropTypes.func.isRequired,
+	itemStyle: React.PropTypes.object.isRequired,
+	item: React.PropTypes.object.isRequired
 };
 
-function ItemChildrenCount (props) {
-	if (!props.showCount) 
-		return null;
-	
-	const childrenCount = props.children ? props.children.length : 0;
-
-	return (
-		<div className="count">
-			{childrenCount}
-		</div>
-	);
-}
+ListItem.defaultProps = {
+	showCount: true
+};
