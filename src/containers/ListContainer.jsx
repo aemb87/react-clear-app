@@ -4,6 +4,12 @@ import ListItemContainer from './ListItemContainer';
 export default class ListContainer extends React.Component {
 	constructor() {
 		super();
+
+		this.state = {
+			drag: {active: false, item: null},
+			edit: {active: false, item: null}
+		};
+
 		this.getItemColor = this.getItemColor.bind(this);
 	}
 
@@ -46,11 +52,10 @@ export default class ListContainer extends React.Component {
 	render() {
 
 		const listItems = [...this.props.items].map((item, index) => {
-			const itemStyle = this.getItemColor(index)
 			return (
 				<ListItemContainer 
 					key={index} 
-					itemStyle={itemStyle} 
+					itemStyle={this.getItemColor(index)} 
 					item={item} 
 					idx={index} 
 					actions={this.props.actions}
@@ -60,16 +65,16 @@ export default class ListContainer extends React.Component {
 		});
 
 		return (
-			<ul>
-				<li className="item list-item dummy-item top">                    
+			<div id="list-collection" className="collection">
+				<div className="item list-item dummy-item top">                    
 					<div className="slider">
 						<div className="inner">
 							<span className="title">Pull to Create Item</span>
 						</div>
 					</div>
-				</li>
+				</div>
 				{listItems}
-			</ul>
+			</div>
 		);
 	}
 };

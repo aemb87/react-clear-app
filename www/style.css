@@ -30,7 +30,7 @@ html,body{margin:0;padding:0;height:100%;font-family:'Helvetica Neue',Helvetica,
 .item .field{cursor:default;display:none;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:19px;font-weight:bold;color:#fff;background:transparent;border:0;padding:0;height:62px;outline:0;position:absolute;top:-1px;left:0;right:0;padding-left:9px}
 .item .title{position:absolute;top:0;left:12px;cursor:default}
 .item .count{position: absolute;right: 0;text-align: center;width: 60px;height: 100%;background-color: rgba(255,255,255,0.15);}
-.item .check,.item .cross{width:62px;height:62px;position:absolute;z-index:0;top:0;opacity:0}
+.item .check,.item .cross{width:62px;height:62px;position:absolute;z-index:0;top:0;}
 .item .check{left:0}.item .cross{right:0}
 .item.sorting{-webkit-transition:-webkit-transform 0s linear!important;-moz-transition:-moz-transform 0s linear!important;transition:transform 0s linear!important}
 .item.sorting .slider{box-shadow:0 2px 16px rgba(0,0,0,0.25);-webkit-transform:scale(1.05)!important;-moz-transform:scale(1.05)!important;transform:scale(1.05)!important}

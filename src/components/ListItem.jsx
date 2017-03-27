@@ -21,7 +21,7 @@ export default class ListItem extends React.Component {
 
 	render() {
 		return (
-			<li className={this.getItemClass()} onClick={this.props.onClick}>
+			<div className={this.getItemClass()} onClick={this.props.onClick}>
 				<div className="slider" style={this.props.itemStyle}>
 					<div className="inner">
 						<span className="title" onClick={this.props.onTitleClick}>
@@ -41,7 +41,9 @@ export default class ListItem extends React.Component {
 						/>
 					</div>
 				</div>
-			</li>
+				<img className="check drag" src="img/check.png" />
+				<img className="cross drag" src="img/cross.png" />
+			</div>
 		);
 	}
 };
