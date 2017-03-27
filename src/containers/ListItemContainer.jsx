@@ -59,3 +59,9 @@ export default class ListItemContainer extends React.Component {
 		);
 	}
 };
+
+ListItemContainer.propTypes = {
+	itemStyle: 	React.PropTypes.object.isRequired,
+	item: 		React.PropTypes.object.isRequired,
+	actions: 	React.PropTypes.object.isRequired
+};
