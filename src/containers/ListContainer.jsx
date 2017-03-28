@@ -1,22 +1,19 @@
 import React from 'react';
 import List from '../components/List';
 import ListItemContainer from './ListItemContainer';
+import AddButtonContainer from './AddButtonContainer';
 
 export default class ListContainer extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			position: {x: 0, y: 0},
 			edit: {active: false, item: false}
 		};
 
-		this.getItemColor = this.getItemColor.bind(this);
-		this.handleDrag = this.handleDrag.bind(this);
-		this.handleDragStop = this.handleDragStop.bind(this);
-		this.toggleItemEdit = this.toggleItemEdit.bind(this);
-		this.setPosition = this.setPosition.bind(this);
-		this.isEditing = this.isEditing.bind(this);
+		this.getItemColor 		= this.getItemColor.bind(this);
+		this.addItemHandler 	= this.addItemHandler.bind(this);
+		this.toggleItemEdit 	= this.toggleItemEdit.bind(this);
 	}
 
 	getItemColor (itemIdx) {
@@ -55,26 +52,8 @@ export default class ListContainer extends React.Component {
 		};
 	}
 
-	setPosition(newX, newY) {
-		this.setState({
-			position: {x: newX, y: newY}
-		});
-	}
-
-	handleDrag(e, ui) {
-		this.setPosition(0, ui.y);
-	}
-
-	handleDragStop(e, ui) {
-		if (this.state.position.y > 50) {
-			const item = this.props.actions.addList('');
-			this.toggleItemEdit(item.id);
-		}
-		this.setPosition(0, 0);
-	}
-
-	toggleItemEdit(itemId) {
-		if (!itemId|| itemId === this.state.edit.item)
+	toggleItemEdit(itemId = false) {
+		if (!itemId)
 			this.setState({
 				edit: {active: false, item: false}
 			});
@@ -82,6 +61,11 @@ export default class ListContainer extends React.Component {
 			this.setState({
 				edit: {active: true, item: itemId}
 			});
+	}
+
+	addItemHandler() {
+		const item = this.props.actions.addList('');
+		this.toggleItemEdit(item.id);
 	}
 
 	isEditing(itemId) {
@@ -105,9 +89,10 @@ export default class ListContainer extends React.Component {
 		});
 
 		return (
-			<List position={this.state.position} dragDisabled={this.state.edit.active} onDrag={this.handleDrag} onDragStop={this.handleDragStop}>
-				{listItems}
-			</List>
+			<div id="list-wraper">
+				<List>{listItems}</List>
+				<AddButtonContainer handleClick={this.addItemHandler} disabled={this.state.edit.active}></AddButtonContainer>
+			</div>
 		);
 	}
 };
