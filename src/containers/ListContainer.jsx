@@ -1,4 +1,5 @@
 import React from 'react';
+import List from '../components/List';
 import ListItemContainer from './ListItemContainer';
 
 export default class ListContainer extends React.Component {
@@ -65,16 +66,7 @@ export default class ListContainer extends React.Component {
 		});
 
 		return (
-			<div id="list-collection" className="collection">
-				<div className="item list-item dummy-item top">                    
-					<div className="slider">
-						<div className="inner">
-							<span className="title">Pull to Create Item</span>
-						</div>
-					</div>
-				</div>
-				{listItems}
-			</div>
+			<List>{listItems}</List>
 		);
 	}
 };

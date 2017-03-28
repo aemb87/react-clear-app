@@ -1,18 +1,18 @@
 import React from 'react';
-import ListItem from './ListItem';
 
 export default class List extends React.Component {
 	render() {
 		return (
-			<ul>
-				{
-					[...this.props.items].map((item, index) => {
-						return (
-							<ListItem key={index} item={item} idx={index} total={this.props.items.length}></ListItem>
-						)
-					})
-				}
-			</ul>
+			<div id="list-collection" className="collection">
+				<div className="item list-item dummy-item top">                    
+					<div className="slider">
+						<div className="inner">
+							<span className="title">Pull to Create Item</span>
+						</div>
+					</div>
+				</div>
+				{this.props.children}
+			</div>
 		);
 	}
 };
