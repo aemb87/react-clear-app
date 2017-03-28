@@ -1,7 +1,9 @@
 import React from 'react';
+import Draggable from 'react-draggable';
 
 export default class ListItem extends React.Component {
-	componentDidUpdate() {
+	
+	componentDidMount() {
 		if (this.props.isEditing) {
 			this.textInput.focus();
 		}
@@ -9,7 +11,7 @@ export default class ListItem extends React.Component {
 
 	getItemClass() {
 		let itemClass = ["item", "list-item"];
-		
+
 		if (this.props.isEditing)
 			itemClass.push("edit");
 		
@@ -35,25 +37,35 @@ export default class ListItem extends React.Component {
 	render() {
 		return (
 			<div className={this.getItemClass()} onClick={this.props.onClick}>
-				<div className="slider" style={this.props.itemStyle}>
-					<div className="inner">
-						<span className="title" onClick={this.props.onTitleClick}>
-							<span className="text">
-								{this.props.itemName}
+				<Draggable 
+				  axis="x" 
+				  bounds={{left: -62, right: 62}} 
+				  position={this.props.dragPosition}
+				  disabled={this.props.dragDisabled}
+				  onStart={this.props.onDragStart} 
+				  onDrag={this.props.onDrag} 
+				  onStop={this.props.onDragStop}
+				>
+					<div className="slider" style={this.props.itemStyle}>
+						<div className="inner">
+							<span className="title" onClick={this.props.onTitleClick}>
+								<span className="text">
+									{this.props.itemName}
+								</span>
 							</span>
-						</span>
-						{this.renderItemCount()}
-						<input 
-							name={"list-item-" + this.props.itemId}
-							className="field" 
-							type="text" 
-							defaultValue={this.props.itemName} 
-							onBlur={this.props.onBlur}
-							onClick={(e) => {e.stopPropagation();}}
-							ref={(input) => {this.textInput = input;}}
-						/>
+							{this.renderItemCount()}
+							<input 
+								name={"list-item-" + this.props.itemId}
+								className="field" 
+								type="text" 
+								defaultValue={this.props.itemName} 
+								onBlur={this.props.onBlur}
+								onClick={(e) => {e.stopPropagation();}}
+								ref={(input) => {this.textInput = input;}}
+							/>
+						</div>
 					</div>
-				</div>
+				</Draggable>
 				<img className="check drag" src="img/check.png" />
 				<img className="cross drag" src="img/cross.png" />
 			</div>
