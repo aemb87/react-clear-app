@@ -7,12 +7,16 @@ export default class ListContainer extends React.Component {
 		super(props);
 
 		this.state = {
-			drag: {active: false, item: null},
-			edit: {active: false, item: null}
+			position: {x: 0, y: 0},
+			edit: {active: false, item: false}
 		};
 
 		this.getItemColor = this.getItemColor.bind(this);
-		this.handleDoubleClick = this.handleDoubleClick.bind(this);
+		this.handleDrag = this.handleDrag.bind(this);
+		this.handleDragStop = this.handleDragStop.bind(this);
+		this.toggleItemEdit = this.toggleItemEdit.bind(this);
+		this.setPosition = this.setPosition.bind(this);
+		this.isEditing = this.isEditing.bind(this);
 	}
 
 	getItemColor (itemIdx) {
@@ -51,9 +55,37 @@ export default class ListContainer extends React.Component {
 		};
 	}
 
-	handleDoubleClick(e) {
-		console.log('test');
-		this.props.actions.addList('');
+	setPosition(newX, newY) {
+		this.setState({
+			position: {x: newX, y: newY}
+		});
+	}
+
+	handleDrag(e, ui) {
+		this.setPosition(0, ui.y);
+	}
+
+	handleDragStop(e, ui) {
+		if (this.state.position.y > 50) {
+			const item = this.props.actions.addList('');
+			this.toggleItemEdit(item.id);
+		}
+		this.setPosition(0, 0);
+	}
+
+	toggleItemEdit(itemId) {
+		if (!itemId|| itemId === this.state.edit.item)
+			this.setState({
+				edit: {active: false, item: false}
+			});
+		else 
+			this.setState({
+				edit: {active: true, item: itemId}
+			});
+	}
+
+	isEditing(itemId) {
+		return this.state.edit.item === itemId;
 	}
 
 	render() {
@@ -61,19 +93,21 @@ export default class ListContainer extends React.Component {
 		const listItems = [...this.props.items].map((item, index) => {
 			return (
 				<ListItemContainer 
-					key={index} 
+					key={item.get('id')} 
 					itemStyle={this.getItemColor(index)} 
 					item={item} 
-					idx={index} 
 					actions={this.props.actions}
+					isEditing={this.isEditing(item.get('id'))}
+					toggleItemEdit={this.toggleItemEdit}
 				>
 				</ListItemContainer>
 			)
 		});
 
 		return (
-
-			<List>{listItems}</List>
+			<List position={this.state.position} dragDisabled={this.state.edit.active} onDrag={this.handleDrag} onDragStop={this.handleDragStop}>
+				{listItems}
+			</List>
 		);
 	}
 };

@@ -7,22 +7,15 @@ export default class ListItemContainer extends React.Component {
 		this.handleClick = this.handleClick.bind(this);
 		this.handleTitleClick = this.handleTitleClick.bind(this);
 		this.handleOnBlur = this.handleOnBlur.bind(this);
-
-		this.state = {
-			isEditing: false
-		};
 	}
 
 	handleClick(e) {
 		e.stopPropagation();
-		history.push('/' + this.props.item.get('id'));
 	}
 
 	handleTitleClick(e) {
 		e.stopPropagation();
-		this.setState({
-			isEditing: true
-		});
+		this.props.toggleItemEdit(this.props.item.get('id'));
 	}
 
 	handleOnBlur(e) {
@@ -31,9 +24,7 @@ export default class ListItemContainer extends React.Component {
 		else if (!e.target.value)
 			this.props.actions.deleteList(this.props.item.get('id'));
 
-		this.setState({
-			isEditing: false
-		});
+		this.props.toggleItemEdit(this.props.item.get('id'));
 	}
 
 	handleSlideRight() {
@@ -48,12 +39,13 @@ export default class ListItemContainer extends React.Component {
 
 		return (
 			<ListItem 
-				isEditing={this.state.isEditing} 
+				isEditing={this.props.isEditing} 
 				onClick={this.handleClick} 
 				onTitleClick={this.handleTitleClick} 
 				onBlur={this.handleOnBlur} 
 				itemStyle={this.props.itemStyle}
-				item={this.props.item}
+				itemId={this.props.item.get('id')}
+				itemName={this.props.item.get('name')}
 			>
 			</ListItem>
 		);
@@ -61,6 +53,7 @@ export default class ListItemContainer extends React.Component {
 };
 
 ListItemContainer.propTypes = {
+	isEditing: 	React.PropTypes.bool.isRequired,
 	itemStyle: 	React.PropTypes.object.isRequired,
 	item: 		React.PropTypes.object.isRequired,
 	actions: 	React.PropTypes.object.isRequired

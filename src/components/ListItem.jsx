@@ -39,15 +39,15 @@ export default class ListItem extends React.Component {
 					<div className="inner">
 						<span className="title" onClick={this.props.onTitleClick}>
 							<span className="text">
-								{this.props.item.get('name')}
+								{this.props.itemName}
 							</span>
 						</span>
 						{this.renderItemCount()}
 						<input 
-							name={"list-item-" + (this.props.item.get('id'))}
+							name={"list-item-" + this.props.itemId}
 							className="field" 
 							type="text" 
-							defaultValue={this.props.item.get('name')} 
+							defaultValue={this.props.itemName} 
 							onBlur={this.props.onBlur}
 							onClick={(e) => {e.stopPropagation();}}
 							ref={(input) => {this.textInput = input;}}
@@ -67,7 +67,8 @@ ListItem.propTypes = {
 	onTitleClick: React.PropTypes.func.isRequired,
 	onBlur: React.PropTypes.func.isRequired,
 	itemStyle: React.PropTypes.object.isRequired,
-	item: React.PropTypes.object.isRequired
+	itemId: React.PropTypes.number.isRequired,
+	itemName: React.PropTypes.string.isRequired
 };
 
 ListItem.defaultProps = {
