@@ -2,8 +2,8 @@ import React from 'react';
 import ListItem from '../components/ListItem';
 
 export default class ListItemContainer extends React.Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.handleClick = this.handleClick.bind(this);
 		this.handleTitleClick = this.handleTitleClick.bind(this);
 		this.handleOnBlur = this.handleOnBlur.bind(this);
@@ -26,9 +26,9 @@ export default class ListItemContainer extends React.Component {
 	}
 
 	handleOnBlur(e) {
-		if (e.target.value)
+		if (e.target.value  && e.target.value !== this.props.item.get('name'))
 			this.props.actions.updateList(this.props.item.get('id'), e.target.value);
-		else
+		else if (!e.target.value)
 			this.props.actions.deleteList(this.props.item.get('id'));
 
 		this.setState({

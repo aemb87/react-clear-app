@@ -3,8 +3,8 @@ import List from '../components/List';
 import ListItemContainer from './ListItemContainer';
 
 export default class ListContainer extends React.Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 
 		this.state = {
 			drag: {active: false, item: null},
@@ -12,6 +12,7 @@ export default class ListContainer extends React.Component {
 		};
 
 		this.getItemColor = this.getItemColor.bind(this);
+		this.handleDoubleClick = this.handleDoubleClick.bind(this);
 	}
 
 	getItemColor (itemIdx) {
@@ -50,6 +51,11 @@ export default class ListContainer extends React.Component {
 		};
 	}
 
+	handleDoubleClick(e) {
+		console.log('test');
+		this.props.actions.addList('');
+	}
+
 	render() {
 
 		const listItems = [...this.props.items].map((item, index) => {
@@ -66,6 +72,7 @@ export default class ListContainer extends React.Component {
 		});
 
 		return (
+
 			<List>{listItems}</List>
 		);
 	}
