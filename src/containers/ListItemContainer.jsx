@@ -1,5 +1,7 @@
 import React from 'react';
 import ListItem from '../components/ListItem';
+import Store from '../reducers/Store';
+import { push } from 'react-router-redux'
 
 export default class ListItemContainer extends React.Component {
 	constructor(props) {
@@ -18,6 +20,7 @@ export default class ListItemContainer extends React.Component {
 
 	handleClick(e) {
 		e.stopPropagation();
+		Store.dispatch(push('/' + this.props.item.get('id')));
 	}
 
 	handleTitleClick(e) {
@@ -27,9 +30,9 @@ export default class ListItemContainer extends React.Component {
 
 	handleBlur(e) {
 		if (e.target.value  && e.target.value !== this.props.item.get('name'))
-			this.props.actions.updateList(this.props.item.get('id'), e.target.value);
+			this.props.actions.update(this.props.item.get('id'), e.target.value);
 		else if (!e.target.value)
-			this.props.actions.deleteList(this.props.item.get('id'));
+			this.props.actions.remove(this.props.item.get('id'));
 
 		this.props.toggleItemEdit();
 	}
@@ -40,9 +43,9 @@ export default class ListItemContainer extends React.Component {
 
 	handleDragStop(e, ui) {
 		if (this.state.position.x < -50)
-			this.props.actions.deleteList(this.props.item.get('id'));
+			this.props.actions.remove(this.props.item.get('id'));
 		else if(this.state.position.x > 50)
-			this.props.actions.completeList(this.props.item.get('id'));
+			this.props.actions.complete(this.props.item.get('id'));
 		else
 			this.setPosition();
 	}

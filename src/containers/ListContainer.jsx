@@ -14,6 +14,7 @@ export default class ListContainer extends React.Component {
 		this.getItemColor 		= this.getItemColor.bind(this);
 		this.addItemHandler 	= this.addItemHandler.bind(this);
 		this.toggleItemEdit 	= this.toggleItemEdit.bind(this);
+		console.log(this.props);
 	}
 
 	getItemColor (itemIdx) {
@@ -64,7 +65,7 @@ export default class ListContainer extends React.Component {
 	}
 
 	addItemHandler() {
-		const item = this.props.actions.addList('');
+		const item = this.props.actions.add('', this.props.match.params.listId);
 		this.toggleItemEdit(item.id);
 	}
 

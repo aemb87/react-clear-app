@@ -1,6 +1,10 @@
-import { createStore } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { routerReducer, routerMiddleware } from 'react-router-redux';
+import createHistory from 'history/createBrowserHistory';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import Immutable from 'immutable';
 import ListReducer from './ListReducer';
+import TodoReducer from './TodoReducer';
 
 // const testInitialState = [
 // 	{name: 'lista1', children: ['item1.1', 'item1.2', 'item1.3']},
@@ -13,15 +17,21 @@ import ListReducer from './ListReducer';
 // 	{name: 'lista8', children: []},
 // ];
 
-const initialState = Immutable.Map(Immutable.fromJS({
-	lists: [],
-	todos: []
-}));
+const reducers = combineReducers({
+    lists: ListReducer,
+    todos: TodoReducer,
+    router: routerReducer
+});
+
+const history = createHistory();
+const middleware = routerMiddleware(history);
+
+window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 
 const Store = createStore(
-	ListReducer, 
-	initialState, 
-	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+	reducers, 
+	composeWithDevTools(applyMiddleware(middleware))
 );
 
 export default Store;
+export { history };
