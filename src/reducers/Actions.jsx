@@ -1,17 +1,22 @@
 import * as types from './ActionTypes';
 
+/* LISTS */
+
 let nextListId = 1;
-let nextTodoId = 1;
 
 export const addList 	  = name => ({ 
 	type: types.ADD_LIST, 
 	id: nextListId++,
 	name: name
 });
-
 export const updateList   = (id, name) => ({ type: types.UPDATE_LIST, id, name});
 export const completeList = id => ({ type: types.COMPLETE_LIST, id });
 export const deleteList   = id => ({ type: types.DELETE_LIST, id });
+
+
+/* TODOS */
+
+let nextTodoId = 1;
 
 export const addTodo 	  = (name, listId) => ({ 
 	type: types.ADD_TODO, 

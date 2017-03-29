@@ -1,0 +1,45 @@
+@import '../../styles/base';
+
+.dummy-item{
+	z-index:-1;
+	-webkit-perspective:400px;
+	-moz-perspective:400px;
+	perspective:400px;
+	-webkit-transition:-webkit-transform opacity .15s ease;
+	-moz-transition:-moz-transform opacity .15s ease;
+	transition:transform opacity .15s ease;
+
+	&.top{
+		-webkit-perspective-origin:bottom center;
+		-moz-perspective-origin:bottom center;
+		perspective-origin:bottom center;
+		top:-62px
+	}
+
+	&.top .slider{
+		-webkit-transition:-webkit-transform 0s linear;
+		-moz-transition:-moz-transform 0s linear;
+		transition:transform 0s linear;
+		-webkit-transform-origin:bottom center;
+		-moz-transform-origin:bottom center;
+		transform-origin:bottom center
+	}
+
+	&.bottom{
+		-webkit-perspective-origin:top center;
+		-moz-perspective-origin:top center;
+		perspective-origin:top center
+	}
+
+	&.bottom .slider{
+		-webkit-transition:-webkit-transform .3s cubic-bezier(0.67,0.18,0.3,0.86);
+		-moz-transition:-moz-transform .3s cubic-bezier(0.67,0.18,0.3,0.86);
+		transition:transform .3s cubic-bezier(0.67,0.18,0.3,0.86);
+		-webkit-transform-origin:top center;
+		-moz-transform-origin:top center;
+		transform-origin:top center;
+		-webkit-transform:rotatex(-91deg);
+		-moz-transform:rotatex(-91deg);
+		transform:rotatex(-91deg)
+	}
+}

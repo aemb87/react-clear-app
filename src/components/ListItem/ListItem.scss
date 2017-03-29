@@ -1,0 +1,138 @@
+@import '../../styles/base';
+
+.item {
+	text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+	position: relative;
+	opacity: 1;
+	overflow:  hidden;
+	height:  60px;
+	line-height:  3;
+	display:  block;
+	top:  -62px;
+	@include transform-origin(center center);
+	@include transition(transform .3s cubic-bezier(0.67,0.18,0.3,0.86),copacity .3s cubic-bezier(0.67,0.18,0.3,0.86));
+	@include box-sizing(border-box);
+
+	& .slider {
+		@include transition(transform background-color .15s cubic-bezier(0.67,0.18,0.3,0.86),color .15s cubic-bezier(0.67,0.18,0.3,0.86));
+		position: relative;
+		z-index: 1;
+		height: 62px;
+	}
+
+	& .inner {
+		border-top: 1px solid rgba(255,255,255,0.07);
+		border-bottom: 1px solid rgba(0,0,0,0.1);height: 100%;
+		@include transform(translate3d(0,0,0));
+		@include box-sizing(border-box);
+	}
+
+	& .field {
+		cursor: default;
+		display: none;
+		font-family: 'Helvetica Neue', Helvetica,Arial, sans-serif;
+		font-size: 19px;
+		font-weight: bold;
+		color: #fff;
+		background: transparent;
+		border: 0;
+		padding: 0;
+		height: 62px;
+		outline: 0;
+		position: absolute;
+		top: -1px;
+		left: 0;
+		right: 0;
+		padding-left: 9px;
+	}
+
+	& .title {
+		position: absolute;
+		top: 0;
+		left: 12px;
+		cursor: default;
+		display: block;
+		min-width: 80px;
+		min-height: 100%;
+	}
+
+	& .count {
+		position: absolute;
+		right: 0;
+		text-align: center;
+		width: 60px;
+		height: 100%;
+		background-color: rgba(255,255,255,0.15);
+	}
+
+	& .check, .item .cross {
+		width: 62px;
+		height: 62px;
+		position: absolute;
+		z-index: 0;
+		top: 0;
+	}
+
+	& .check {
+		left: 0;
+	}
+
+	& .cross {
+		right: 0;
+	}
+
+	&.sorting {
+		@include transition(transform 0s linear !important);
+
+		& .slider {
+			box-shadow: 0 2px 16px rgba(0,0,0,0.25);
+			@include transform(scale(1.05) !important);
+		}
+	}
+	
+	&.sorting-trans {
+		z-index: 999 !important;
+		@include transition(transform .12s ease-out);
+
+		& .slider {
+			@include transition(transform .12s ease-out);
+		}
+	}
+
+	&.top {
+		z-index: 998 !important;
+	}
+
+	&.edit {
+		opacity: 1 !important;
+
+		& .title {
+			display:  none;
+		}
+
+		& .field {
+			display:  block;
+		}
+	}
+	
+	&.fade {
+		opacity: 0;
+	}
+
+	&.list-item  { 
+		& .count {
+			position: absolute;
+			width: 62px;
+			height: 61px;
+			right: 0;
+			top: -1px;
+			background-color: rgba(255,255,255,0.15);
+			text-align: center;
+		}
+
+		&.empty {
+			color: rgba(255,255,255,0.5);
+			text-shadow: 0 1px 1px rgba(0,0,0,0.13);
+		}
+	}
+}

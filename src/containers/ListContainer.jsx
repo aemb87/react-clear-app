@@ -1,5 +1,5 @@
 import React from 'react';
-import List from '../components/List';
+import List from '../components/List/List';
 import ListItemContainer from './ListItemContainer';
 import AddButtonContainer from './AddButtonContainer';
 
@@ -14,7 +14,6 @@ export default class ListContainer extends React.Component {
 		this.getItemColor 		= this.getItemColor.bind(this);
 		this.addItemHandler 	= this.addItemHandler.bind(this);
 		this.toggleItemEdit 	= this.toggleItemEdit.bind(this);
-		console.log(this.props);
 	}
 
 	getItemColor (itemIdx) {

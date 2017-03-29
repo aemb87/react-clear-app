@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './DummyItem.scss';
 
 export default class DummyItem extends React.Component {
 	render() {

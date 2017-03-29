@@ -1,5 +1,5 @@
 import React from 'react';
-import ListItem from '../components/ListItem';
+import ListItem from '../components/ListItem/ListItem';
 import Store from '../reducers/Store';
 import { push } from 'react-router-redux'
 

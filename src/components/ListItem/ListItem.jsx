@@ -1,5 +1,6 @@
 import React from 'react';
 import Draggable from 'react-draggable';
+import styles from './ListItem.scss';
 
 export default class ListItem extends React.Component {
 	

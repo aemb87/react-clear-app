@@ -9,6 +9,7 @@ import {
 	deleteTodo as remove 
 } from '../reducers/Actions';
 
+
 const mapStateToProps = (state, ownProps) => {
 	return {
     	items: state.todos.filter(function(item) {
