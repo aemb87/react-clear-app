@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './AddButton.scss';
 
 export default class AddButton extends React.Component {
 	render() {

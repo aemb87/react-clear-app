@@ -1,5 +1,5 @@
 import React from 'react';
-import DummyItem from './DummyItem';
+import DummyItem from './DummyItem/DummyItem';
 
 export default class List extends React.Component {
 	render() {
