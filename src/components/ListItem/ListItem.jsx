@@ -4,6 +4,20 @@ import styles from './ListItem.scss';
 
 export default class ListItem extends React.Component {
 	
+	static propTypes = {
+		isEditing: 	  React.PropTypes.bool.isRequired,
+		onClick: 	  React.PropTypes.func.isRequired,
+		onTitleClick: React.PropTypes.func.isRequired,
+		onBlur: 	  React.PropTypes.func.isRequired,
+		itemStyle: 	  React.PropTypes.object.isRequired,
+		itemId: 	  React.PropTypes.number.isRequired,
+		itemName: 	  React.PropTypes.string.isRequired
+	};
+
+	static defaultProps = {
+		showCount: true
+	};
+
 	componentDidMount() {
 		if (this.props.isEditing) {
 			this.textInput.focus();
@@ -72,18 +86,5 @@ export default class ListItem extends React.Component {
 			</div>
 		);
 	}
-};
-
-ListItem.propTypes = {
-	isEditing: React.PropTypes.bool.isRequired,
-	onClick: React.PropTypes.func.isRequired,
-	onTitleClick: React.PropTypes.func.isRequired,
-	onBlur: React.PropTypes.func.isRequired,
-	itemStyle: React.PropTypes.object.isRequired,
-	itemId: React.PropTypes.number.isRequired,
-	itemName: React.PropTypes.string.isRequired
-};
-
-ListItem.defaultProps = {
-	showCount: true
-};
+	
+}

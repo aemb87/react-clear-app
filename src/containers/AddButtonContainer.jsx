@@ -2,6 +2,11 @@ import React from 'react';
 import AddButton from '../components/AddButton/AddButton';
 
 export default class AddButtonContainer extends React.Component {
+	
+	static propTypes = {
+		disabled: React.PropTypes.bool.isRequired
+	};
+
 	constructor(props) {
 		super(props);
 
@@ -19,4 +24,5 @@ export default class AddButtonContainer extends React.Component {
 			<AddButton onClick={this.handleClick} disabled={this.props.disabled}></AddButton>
 		);
 	}
+
 }

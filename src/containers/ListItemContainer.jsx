@@ -4,6 +4,14 @@ import Store from '../reducers/Store';
 import { push } from 'react-router-redux'
 
 export default class ListItemContainer extends React.Component {
+
+	static propTypes = {
+		isEditing: 	React.PropTypes.bool.isRequired,
+		itemStyle: 	React.PropTypes.object.isRequired,
+		item: 		React.PropTypes.object.isRequired,
+		actions: 	React.PropTypes.object.isRequired
+	};
+
 	constructor(props) {
 		super(props);
 
@@ -11,11 +19,11 @@ export default class ListItemContainer extends React.Component {
 			position : {x: 0, y: 0}
 		};
 
-		this.handleClick 		= this.handleClick.bind(this);
-		this.handleTitleClick 	= this.handleTitleClick.bind(this);
-		this.handleBlur 		= this.handleBlur.bind(this);
-		this.handleDrag 		= this.handleDrag.bind(this);
-		this.handleDragStop 	= this.handleDragStop.bind(this);
+		this.handleClick 	  = this.handleClick.bind(this);
+		this.handleTitleClick = this.handleTitleClick.bind(this);
+		this.handleBlur 	  = this.handleBlur.bind(this);
+		this.handleDrag 	  = this.handleDrag.bind(this);
+		this.handleDragStop   = this.handleDragStop.bind(this);
 	}
 
 	handleClick(e) {
@@ -76,11 +84,5 @@ export default class ListItemContainer extends React.Component {
 			</ListItem>
 		);
 	}
-};
 
-ListItemContainer.propTypes = {
-	isEditing: 	React.PropTypes.bool.isRequired,
-	itemStyle: 	React.PropTypes.object.isRequired,
-	item: 		React.PropTypes.object.isRequired,
-	actions: 	React.PropTypes.object.isRequired
-};
+}
