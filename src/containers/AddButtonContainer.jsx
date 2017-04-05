@@ -1,8 +1,8 @@
 import React from 'react';
-import AddButton from '../components/AddButton/AddButton';
+import AddButton from '../components/addButton/addButton';
 
 export default class AddButtonContainer extends React.Component {
-	
+
 	static propTypes = {
 		disabled: React.PropTypes.bool.isRequired
 	};

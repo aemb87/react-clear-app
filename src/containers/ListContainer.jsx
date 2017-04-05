@@ -1,11 +1,11 @@
 import React from 'react';
-import List from '../components/List/List';
-import ListItemContainer from './ListItemContainer';
-import TodoItemContainer from './TodoItemContainer';
-import AddButtonContainer from './AddButtonContainer';
+import List from '../components/list/list';
+import ListItemContainer from './listItemContainer';
+import TodoItemContainer from './todoItemContainer';
+import AddButtonContainer from './addButtonContainer';
 
 export default class ListContainer extends React.Component {
-	
+
 	constructor(props) {
 		super(props);
 
@@ -22,7 +22,7 @@ export default class ListContainer extends React.Component {
 			this.setState({
 				edit: {active: false, item: false}
 			});
-		else 
+		else
 			this.setState({
 				edit: {active: true, item: itemId}
 			});
@@ -48,11 +48,11 @@ export default class ListContainer extends React.Component {
 		if (this.isTodoList()) {
 			listItems = [...this.props.items].map((item, index) => {
 				return (
-					<TodoItemContainer 
-						key={item.get('id')} 
+					<TodoItemContainer
+						key={item.get('id')}
 						idx={index}
 						total={this.props.items.size}
-						item={item} 
+						item={item}
 						actions={this.props.actions}
 						isEditing={this.isEditing(item.get('id'))}
 						toggleItemEdit={this.toggleItemEdit}
@@ -64,11 +64,11 @@ export default class ListContainer extends React.Component {
 		else {
 			listItems = [...this.props.items].map((item, index) => {
 				return (
-					<ListItemContainer 
-						key={item.get('id')} 
+					<ListItemContainer
+						key={item.get('id')}
 						idx={index}
 						total={this.props.items.size}
-						item={item} 
+						item={item}
 						actions={this.props.actions}
 						isEditing={this.isEditing(item.get('id'))}
 						toggleItemEdit={this.toggleItemEdit}

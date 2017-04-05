@@ -1,8 +1,8 @@
 import React from 'react';
-import styles from './AddButton.scss';
+import styles from './addButton.scss';
 
 export default class AddButton extends React.Component {
-	
+
 	static propTypes = {
 		disabled: React.PropTypes.bool.isRequired,
 		onClick:  React.PropTypes.func.isRequired
@@ -15,5 +15,5 @@ export default class AddButton extends React.Component {
 			</div>
 		);
 	}
-	
+
 }

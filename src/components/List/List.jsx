@@ -1,6 +1,6 @@
 import React from 'react';
-import DummyItem from '../DummyItem/DummyItem';
-import styles from './List.scss';
+import DummyItem from '../dummyItem/dummyItem';
+import styles from './list.scss';
 
 export default class List extends React.Component {
 	render() {

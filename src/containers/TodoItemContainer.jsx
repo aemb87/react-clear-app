@@ -1,11 +1,11 @@
 import React from 'react';
-import TodoItem from '../components/TodoItem/TodoItem';
+import TodoItem from '../components/todoItem/todoItem';
 
 export default class TodoItemContainer extends React.Component {
 
 	static propTypes = {
 		idx: 		React.PropTypes.number.isRequired,
-		total: 		React.PropTypes.number.isRequired, 
+		total: 		React.PropTypes.number.isRequired,
 		isEditing: 	React.PropTypes.bool.isRequired,
 		item: 		React.PropTypes.object.isRequired,
 		actions: 	React.PropTypes.object.isRequired
@@ -101,9 +101,9 @@ export default class TodoItemContainer extends React.Component {
 	render() {
 
 		return (
-			<TodoItem 
-				isEditing={this.props.isEditing} 
-				onTitleClick={this.handleTitleClick} 
+			<TodoItem
+				isEditing={this.props.isEditing}
+				onTitleClick={this.handleTitleClick}
 				onBlur={this.handleBlur}
 				onDrag={this.handleDrag}
 				onDragStop={this.handleDragStop}

@@ -1,13 +1,13 @@
 import React from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
-import ListContainer from '../containers/ListContainer';
-import { 
-	addTodo as add, 
-	updateTodo as update, 
-	completeTodo as complete, 
-	deleteTodo as remove 
-} from '../reducers/Actions';
+import ListContainer from '../containers/listContainer';
+import {
+	addTodo as add,
+	updateTodo as update,
+	completeTodo as complete,
+	deleteTodo as remove
+} from '../actions/todoActions';
 
 
 const mapStateToProps = (state, ownProps) => {

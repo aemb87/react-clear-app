@@ -3,8 +3,8 @@ import { routerReducer, routerMiddleware } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import Immutable from 'immutable';
-import ListReducer from './ListReducer';
-import TodoReducer from './TodoReducer';
+import ListReducer from '../reducers/listReducer';
+import TodoReducer from '../reducers/todoReducer';
 
 
 const reducers = combineReducers({
@@ -19,7 +19,7 @@ const middleware = routerMiddleware(history);
 window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 
 const Store = createStore(
-	reducers, 
+	reducers,
 	composeWithDevTools(applyMiddleware(middleware))
 );
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import Draggable from 'react-draggable';
-import styles from './ListItem.scss';
+import styles from './listItem.scss';
 
 export default class ListItem extends React.Component {
-	
+
 	static propTypes = {
 		isEditing: 	  React.PropTypes.bool.isRequired,
 		onClick: 	  React.PropTypes.func.isRequired,
@@ -34,7 +34,7 @@ export default class ListItem extends React.Component {
 
 		if (this.props.isEditing)
 			itemClass.push(mainClass + "--edit");
-		
+
 		if (!this.props.children || this.props.children.length === 0)
 			itemClass.push(mainClass + "--empty");
 
@@ -42,7 +42,7 @@ export default class ListItem extends React.Component {
 	}
 
 	renderItemCount() {
-	
+
 		const childrenCount = this.props.children ? this.props.children : 0;
 
 		return (
@@ -55,13 +55,13 @@ export default class ListItem extends React.Component {
 	render() {
 		return (
 			<div className={this.getItemClass()} onClick={this.props.onClick}>
-				<Draggable 
-				  axis="x" 
-				  bounds={{left: -62, right: 62}} 
+				<Draggable
+				  axis="x"
+				  bounds={{left: -62, right: 62}}
 				  position={this.props.dragPosition}
 				  disabled={this.props.dragDisabled}
-				  onStart={this.props.onDragStart} 
-				  onDrag={this.props.onDrag} 
+				  onStart={this.props.onDragStart}
+				  onDrag={this.props.onDrag}
 				  onStop={this.props.onDragStop}
 				>
 					<div className="item__slider" style={this.props.itemStyle}>
@@ -72,11 +72,11 @@ export default class ListItem extends React.Component {
 								</span>
 							</span>
 							{this.renderItemCount()}
-							<input 
+							<input
 								name={"list-item-" + this.props.itemId}
-								className="item__field" 
-								type="text" 
-								defaultValue={this.props.itemName} 
+								className="item__field"
+								type="text"
+								defaultValue={this.props.itemName}
 								onBlur={this.props.onBlur}
 								onClick={(e) => {e.stopPropagation();}}
 								ref={(input) => {this.textInput = input;}}
@@ -89,5 +89,5 @@ export default class ListItem extends React.Component {
 			</div>
 		);
 	}
-	
+
 }

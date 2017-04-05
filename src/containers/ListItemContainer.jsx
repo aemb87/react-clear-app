@@ -1,7 +1,7 @@
 import React from 'react';
-import ListItem from '../components/ListItem/ListItem';
-import Store from '../reducers/Store';
 import { push } from 'react-router-redux'
+import ListItem from '../components/listItem/listItem';
+import Store from '../store/store';
 
 export default class ListItemContainer extends React.Component {
 
@@ -104,10 +104,10 @@ export default class ListItemContainer extends React.Component {
 	render() {
 
 		return (
-			<ListItem 
-				isEditing={this.props.isEditing} 
-				onClick={this.handleClick} 
-				onTitleClick={this.handleTitleClick} 
+			<ListItem
+				isEditing={this.props.isEditing}
+				onClick={this.handleClick}
+				onTitleClick={this.handleTitleClick}
 				onBlur={this.handleBlur}
 				onDragStart={this.handleDragStart}
 				onDrag={this.handleDrag}

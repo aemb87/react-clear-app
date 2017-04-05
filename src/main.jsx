@@ -5,10 +5,10 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux'
 
-import MainView from './views/MainView';
-import SubView from './views/SubView';
+import MainView from './views/mainView';
+import SubView from './views/subView';
 
-import Store, { history } from './reducers/Store';
+import Store, { history } from './store/store';
 
 const App = () => (
 	<Provider store={Store}>
@@ -23,7 +23,7 @@ const App = () => (
 
 document.addEventListener('DOMContentLoaded', function(){
 	ReactDOM.render(
-		React.createElement(App), 
+		React.createElement(App),
 		document.getElementById('mount')
 	);
 });
