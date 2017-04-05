@@ -1,8 +1,17 @@
-// Karma configuration
-// Generated on Fri Mar 31 2017 15:52:20 GMT-0300 (UYT)
-
 const path = require('path');
 const webpack = require('webpack');
+const webpackConfig = require('../webpack.config.js');
+
+
+webpackConfig.resolve.alias = {
+    actions:    path.resolve(webpackConfig.context, 'actions/'),
+    constants:  path.resolve(webpackConfig.context, 'constants/'),
+    reducers:   path.resolve(webpackConfig.context, 'reducers/'),
+    containers: path.resolve(webpackConfig.context, 'containers/'),
+    components: path.resolve(webpackConfig.context, 'components/'),
+    routes:     path.resolve(webpackConfig.context, 'routes/')
+}
+
 
 module.exports = function(config) {
   config.set({
@@ -47,72 +56,7 @@ module.exports = function(config) {
         captureConsole: true
     },
 
-    webpack: {
-        context: [path.resolve('src'), path.resolve('tests')],
-        // plugins: [
-        //     new CaseSensitivePathsPlugin(),
-        //     new ExtractTextPlugin('style.css'),
-        //     new webpack.DefinePlugin({
-        //         '__ENVIRONMENT__': '"DEV"',
-        //         '__DEBUG_MODE__': true,
-        //         '__BASE_HOST__': JSON.stringify(process.env.BASE_HOST || '') ,
-        //         '__MOCK_ALL_ENDPOINTS__': JSON.stringify(process.env.MOCK_ALL_ENDPOINTS || ''),
-        //         '__MOCKED_ENDPOINTS__': JSON.stringify(process.env.MOCKED_ENDPOINTS || ''),
-        //         '__PUBLIC_URL__': JSON.stringify(process.env.PUBLIC_URL || ''),
-        //         '__REDIRECTED_ENDPOINTS__': JSON.stringify(process.env.REDIRECTED_ENDPOINTS || ''),
-        //         '__LOG_API_ERRORS_REMOTELY__': JSON.stringify(process.env.LOG_API_ERRORS_REMOTELY || ''),
-        //         '__SHOW_API_ERRORS__': JSON.stringify(process.env.SHOW_API_ERRORS || '')
-        //     })
-        // ],
-        module: {
-            loaders: [
-                {
-                    test: /\.jsx?$/,
-                    exclude: /(node_modules)/,
-                    loader: 'babel',
-                    query: {
-                        presets: ['react', ["es2015", {"loose": true}]],
-                        plugins: ['array-includes'],
-                        cacheDirectory: true
-                    }
-                },
-                // {
-                //     test: /\.?css$/,
-                //     loader: ExtractTextPlugin.extract(
-                //         "style",
-                //         "css!sass")
-                // },
-                // {
-                //     test: /\.(png|jpg|gif)$/,
-                //     loader: 'url-loader?limit=8192'
-                // },
-                // {
-                //     test: /\.(otf|ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-                //     loader: 'file-loader'
-                // },
-                // {
-                //     test: /\.json$/,
-                //     loader: 'json'
-                // }
-
-            ]
-        },
-        resolve: {
-            modules: ['node_modules'],
-        },
-
-        // externals: {
-        //     'react/addons': true,
-        //     'react/lib/ExecutionEnvironment': true,
-        //     'react/lib/ReactContext': true
-        // },
-
-        // babelPreprocessor: {
-        //     options: {
-        //         presets: ['airbnb']
-        //     }
-        // }
-    },
+    webpack: webpackConfig,
 
     webpackMiddleware: {
         noInfo: true,

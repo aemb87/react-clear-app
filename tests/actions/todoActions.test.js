@@ -1,5 +1,6 @@
-import * as actions from 'reducers/Actions';
-import * as actionTypes from 'reducers/ActionTypes';
+import expect from 'expect';
+import * as actions from 'actions/todoActions';
+import * as actionTypes from 'constants/actionTypes';
 
 
 describe('Todo action creator', function() {

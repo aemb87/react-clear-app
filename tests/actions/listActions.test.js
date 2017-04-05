@@ -1,5 +1,7 @@
-import * as actions from 'reducers/Actions';
-import * as actionTypes from 'reducers/ActionTypes';
+import expect from 'expect';
+import * as actions from 'actions/listActions';
+import * as actionTypes from 'constants/actionTypes';
+
 
 describe('List action creator', function() {
 
