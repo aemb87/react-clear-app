@@ -1,6 +1,6 @@
 @import '../../styles/base';
 
-.todo-item { 
+.todo-item {
 	text-shadow: 0 1px 1px rgba(0,0,0,0.3);
 	position: relative;
 	opacity: 1;
@@ -15,14 +15,6 @@
 		position: relative;
 		z-index: 1;
 		height: 62px;
-
-		&--done {
-			background-color: #000 !important;
-		}
-
-		&--green {
-			background-color: #0A3 !important;
-		}
 	}
 
 	&__inner {
@@ -48,6 +40,10 @@
 		left: 0;
 		right: 0;
 		padding-left: 9px;
+
+        &--edit {
+            display:  block;
+        }
 	}
 
 	&__title {
@@ -62,6 +58,10 @@
 			color: #666;
 			text-decoration: line-through;;
 		}
+
+        &--edit {
+            display:  none;
+        }
 	}
 
 	&__check, &__cross {
@@ -82,13 +82,5 @@
 
 	&--edit {
 		opacity: 1 !important;
-
-		.todo-item__title {
-			display:  none;
-		}
-
-		.todo-item__field {
-			display:  block;
-		}
 	}
 }

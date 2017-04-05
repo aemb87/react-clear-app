@@ -1,12 +1,13 @@
 import React from 'react';
 import Draggable from 'react-draggable';
-import styles from './TodoItem.scss';
+import classNames from 'classnames';
+import styles from './todoItem.scss';
+
 
 export default class TodoItem extends React.Component {
-	
+
 	static propTypes = {
 		isEditing: 	   React.PropTypes.bool.isRequired,
-		//dragCompleted: React.PropTypes.bool.isRequired,
 		onTitleClick:  React.PropTypes.func.isRequired,
 		onBlur: 	   React.PropTypes.func.isRequired,
 		itemStyle: 	   React.PropTypes.object.isRequired,
@@ -33,52 +34,48 @@ export default class TodoItem extends React.Component {
 		}
 	}
 
-	getItemClass() {
-		const mainClass = 'todo-item';
-		const itemClass = [mainClass];
-
-		if (this.props.isEditing)
-			itemClass.push(mainClass + "--edit");
-		
-		if (!this.props.children || this.props.children.length === 0)
-			itemClass.push(mainClass + "--empty");
-
-		return itemClass.join(" ");
-	}
-
 	render() {
+
+        const mainClass = classNames({
+            'todo-item': true,
+            'todo-item--edit': this.props.isEditing,
+            'todo-item--empty': !this.props.children || this.props.children.length === 0
+        });
+
+        const titleClass = classNames({
+            'todo-item__title': true,
+            'todo-item__title--done': this.props.itemCompleted,
+            'todo-item__title--edit': this.props.isEditing,
+        })
+
+        const fieldClass = classNames({
+            'todo-item__field': true,
+            'todo-item__field--edit': this.props.isEditing
+        });
+
 		return (
-			<div className={this.getItemClass()}>
-				<Draggable 
-				  axis="x" 
-				  bounds={{left: -62, right: 62}} 
+			<div className={mainClass}>
+				<Draggable
+				  axis="x"
+				  bounds={{left: -62, right: 62}}
 				  position={this.props.dragPosition}
-				  disabled={this.props.dragDisabled} 
-				  onDrag={this.props.onDrag} 
+				  disabled={this.props.dragDisabled}
+				  onDrag={this.props.onDrag}
 				  onStop={this.props.onDragStop}
 				>
-					<div 
-					  className={[
-					  	"todo-item__slider",
-					  	 (this.props.itemCompleted ? "todo-item__slider--done" : ""),
-					  	 (this.props.dragCompleted ? "todo-item__slider--green" : "")
-				  	  ]} 
-					  style={this.props.itemStyle} 
-					>
+					<div
+					  className="todo-item__slider" style={this.props.itemStyle}>
 						<div className="todo-item__inner">
-							<span 
-							  className={"todo-item__title " + (this.props.itemCompleted ? "todo-item__title--done" : "")} 
-							  onClick={this.props.onTitleClick}
-							>
+							<span className={titleClass} onClick={this.props.onTitleClick}>
 								<span className="todo-item__text">
 									{this.props.itemName}
 								</span>
 							</span>
-							<input 
+							<input
 								name={"list-item-" + this.props.itemId}
-								className="todo-item__field" 
-								type="text" 
-								defaultValue={this.props.itemName} 
+								className={fieldClass}
+								type="text"
+								defaultValue={this.props.itemName}
 								onBlur={this.props.onBlur}
 								onClick={(e) => {e.stopPropagation();}}
 								ref={(input) => {this.textInput = input;}}
@@ -91,5 +88,5 @@ export default class TodoItem extends React.Component {
 			</div>
 		);
 	}
-	
+
 }
