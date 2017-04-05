@@ -6,7 +6,8 @@
   "scripts": {
     "compile": "webpack",
     "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "karma start config/karma.conf.js",
+    "coverage": "karma start config/karma-coverage.conf.js"
   },
   "keywords": [],
   "author": "Andrés Martínez",
@@ -37,5 +38,13 @@
   },
   "devDependencies": {
     "babel-plugin-transform-class-properties": "^6.23.0",
+    "isparta": "^4.0.0",
+    "karma": "^1.5.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-coverage": "^1.1.1",
+    "karma-mocha": "^1.3.0",
+    "karma-mocha-reporter": "^2.2.3",
+    "karma-webpack": "^2.0.3",
+    "mocha": "^3.2.0"
   }
 }
