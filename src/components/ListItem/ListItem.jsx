@@ -14,36 +14,39 @@ export default class ListItem extends React.Component {
 		itemName: 	  React.PropTypes.string.isRequired
 	};
 
-	static defaultProps = {
-		showCount: true
-	};
-
 	componentDidMount() {
+		this.focusTextInput();
+	}
+
+	componentDidUpdate() {
+		this.focusTextInput();
+	}
+
+	focusTextInput() {
 		if (this.props.isEditing) {
 			this.textInput.focus();
 		}
 	}
 
 	getItemClass() {
-		let itemClass = ["item", "list-item"];
+		const mainClass = 'item';
+		const itemClass = [mainClass];
 
 		if (this.props.isEditing)
-			itemClass.push("edit");
+			itemClass.push(mainClass + "--edit");
 		
 		if (!this.props.children || this.props.children.length === 0)
-			itemClass.push("empty");
+			itemClass.push(mainClass + "--empty");
 
 		return itemClass.join(" ");
 	}
 
 	renderItemCount() {
-		if (!this.props.showCount) 
-			return "";
 	
-		const childrenCount = this.props.children ? this.props.children.length : 0;
+		const childrenCount = this.props.children ? this.props.children : 0;
 
 		return (
-			<div className="count">
+			<div className="item__count">
 				{childrenCount}
 			</div>
 		);
@@ -61,17 +64,17 @@ export default class ListItem extends React.Component {
 				  onDrag={this.props.onDrag} 
 				  onStop={this.props.onDragStop}
 				>
-					<div className="slider" style={this.props.itemStyle}>
-						<div className="inner">
-							<span className="title" onClick={this.props.onTitleClick}>
-								<span className="text">
+					<div className="item__slider" style={this.props.itemStyle}>
+						<div className="item__inner">
+							<span className="item__title" onClick={this.props.onTitleClick}>
+								<span className="item__text">
 									{this.props.itemName}
 								</span>
 							</span>
 							{this.renderItemCount()}
 							<input 
 								name={"list-item-" + this.props.itemId}
-								className="field" 
+								className="item__field" 
 								type="text" 
 								defaultValue={this.props.itemName} 
 								onBlur={this.props.onBlur}
@@ -81,8 +84,8 @@ export default class ListItem extends React.Component {
 						</div>
 					</div>
 				</Draggable>
-				<img className="check drag" src="img/check.png" />
-				<img className="cross drag" src="img/cross.png" />
+				<img className="item__check" src="img/check.png" />
+				<img className="item__cross" src="img/cross.png" />
 			</div>
 		);
 	}

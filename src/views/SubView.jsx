@@ -13,7 +13,7 @@ import {
 const mapStateToProps = (state, ownProps) => {
 	return {
     	items: state.todos.filter(function(item) {
-    		return item.get('completed') === false && item.get('listId') == ownProps.match.params.listId
+    		return item.get('listId') == ownProps.match.params.listId
     	})
   	};
 };

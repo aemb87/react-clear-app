@@ -5,7 +5,7 @@ import ListContainer from '../containers/ListContainer';
 import { 
 	addList as add, 
 	updateList as update, 
-	complete as complete, 
+	completeList as complete, 
 	deleteList as remove 
 } from '../reducers/Actions';
 

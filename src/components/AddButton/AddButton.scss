@@ -16,9 +16,11 @@
 	margin-left: -28px; 
 	z-index: 99999;
 	outline: 0; 
+	overflow: hidden; 
 	@include transition(background-color 0.5s ease);
+	@include transform(translate3d(0, 0, 0));
 
-	& span {
+	&__plus {
 		position: absolute; 
 		left: 0; 
 		top: 50%; 
@@ -28,21 +30,16 @@
 		margin-top: -22px; 
 		color: #FFF; 
 		@include transition(color 0.5s ease);
+
+		&--disabled {
+			color: #3a3939;
+		}
 	}
 
-	&.disabled {
+	&--disabled {
 		background-color: black; 
 		pointer-events: none;
 	}
-
-	&.disabled span {
-		color: #3a3939;
-	}
-}
-
-.ripple {
-	overflow: hidden; 
-	@include transform(translate3d(0, 0, 0));
 
 	&:after {
 		content: ""; 
@@ -67,5 +64,3 @@
 		@include transform(scale(0,0));
 	}
 }
-
-

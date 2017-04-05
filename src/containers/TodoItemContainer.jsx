@@ -1,13 +1,11 @@
 import React from 'react';
-import ListItem from '../components/ListItem/ListItem';
-import Store from '../reducers/Store';
-import { push } from 'react-router-redux'
+import TodoItem from '../components/TodoItem/TodoItem';
 
-export default class ListItemContainer extends React.Component {
+export default class TodoItemContainer extends React.Component {
 
 	static propTypes = {
 		idx: 		React.PropTypes.number.isRequired,
-		total: 		React.PropTypes.number.isRequired,
+		total: 		React.PropTypes.number.isRequired, 
 		isEditing: 	React.PropTypes.bool.isRequired,
 		item: 		React.PropTypes.object.isRequired,
 		actions: 	React.PropTypes.object.isRequired
@@ -17,19 +15,13 @@ export default class ListItemContainer extends React.Component {
 		super(props);
 
 		this.state = {
-			position : {x: 0, y: 0}
+			position: {x: 0, y: 0}
 		};
 
-		this.handleClick 	  = this.handleClick.bind(this);
 		this.handleTitleClick = this.handleTitleClick.bind(this);
 		this.handleBlur 	  = this.handleBlur.bind(this);
 		this.handleDrag 	  = this.handleDrag.bind(this);
 		this.handleDragStop   = this.handleDragStop.bind(this);
-	}
-
-	handleClick(e) {
-		e.stopPropagation();
-		Store.dispatch(push('/' + this.props.item.get('id')));
 	}
 
 	handleTitleClick(e) {
@@ -38,7 +30,7 @@ export default class ListItemContainer extends React.Component {
 	}
 
 	handleBlur(e) {
-		if (e.target.value  && e.target.value !== this.props.item.get('name'))
+		if (e.target.value && e.target.value !== this.props.item.get('name'))
 			this.props.actions.update(this.props.item.get('id'), e.target.value);
 		else if (!e.target.value)
 			this.props.actions.remove(this.props.item.get('id'));
@@ -51,10 +43,13 @@ export default class ListItemContainer extends React.Component {
 	}
 
 	handleDragStop(e, ui) {
-		if (this.state.position.x < -50)
+		if (this.state.position.x < -50) {
 			this.props.actions.remove(this.props.item.get('id'));
-		else if(this.state.position.x > 50)
+		}
+		else if(this.state.position.x > 50) {
 			this.props.actions.complete(this.props.item.get('id'));
+			this.setPosition();
+		}
 		else
 			this.setPosition();
 	}
@@ -66,50 +61,50 @@ export default class ListItemContainer extends React.Component {
 	}
 
 	getItemColor (itemIdx) {
-		var baseH = 212,
-		    baseS = 93,
-		    baseL = 53,
+		if (this.props.item.get('completed') === true)
+			return {backgroundColor: '#000'};
+		if (this.state.position.x > 50)
+			return {backgroundColor : '#0A3'};
 
-		    stepH = -2.5,
-		    stepS = 1,
-		    stepL = 2.5,
+		const baseH = 354,
+	        baseS = 100,
+	        baseL = 46,
 
-		    maxColorSpan = 5,
+	        stepH = 7,
+	        stepL = 2,
 
-		    spanH = maxColorSpan * stepH,
-		    spanS = maxColorSpan * stepS,
-		    spanL = maxColorSpan * stepL;
+	        maxColorSpan = 7,
+
+	        spanH = stepH * maxColorSpan,
+	        spanL = stepL * maxColorSpan,
+
+	        o = itemIdx,
+		    n = this.props.total;
 
 
-		var o = itemIdx,
-		    n = this.props.total,
-		    sH = stepH,
-		    sS = stepS,
+		let sH = stepH,
 		    sL = stepL;
 
 		if (n > maxColorSpan) {
 		    sH = spanH / n;
-		    sS = spanS / n;
 		    sL = spanL / n;
 		}
 
 		return {
 			backgroundColor : 'hsl('
-		        + (baseH + o * sH) + ','
-		        + Math.min(100, (baseS + o * sS)) + '%,'
-		        + Math.min(100, (baseL + o * sL)) + '%)'
+                + (baseH + o * sH) + ','
+                + (o ? (baseS - 10) : baseS)  + '%,'
+                + (baseL + o * sL) + '%)'
 		};
 	}
 
 	render() {
 
 		return (
-			<ListItem 
+			<TodoItem 
 				isEditing={this.props.isEditing} 
-				onClick={this.handleClick} 
 				onTitleClick={this.handleTitleClick} 
 				onBlur={this.handleBlur}
-				onDragStart={this.handleDragStart}
 				onDrag={this.handleDrag}
 				onDragStop={this.handleDragStop}
 				dragPosition={this.state.position}
@@ -117,8 +112,10 @@ export default class ListItemContainer extends React.Component {
 				itemStyle={this.getItemColor(this.props.idx)}
 				itemId={this.props.item.get('id')}
 				itemName={this.props.item.get('name')}
+				itemCompleted={this.props.item.get('completed')}
+
 			>
-			</ListItem>
+			</TodoItem>
 		);
 	}
 

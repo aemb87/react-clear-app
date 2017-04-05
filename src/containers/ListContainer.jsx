@@ -1,6 +1,7 @@
 import React from 'react';
 import List from '../components/List/List';
 import ListItemContainer from './ListItemContainer';
+import TodoItemContainer from './TodoItemContainer';
 import AddButtonContainer from './AddButtonContainer';
 
 export default class ListContainer extends React.Component {
@@ -12,45 +13,8 @@ export default class ListContainer extends React.Component {
 			edit: {active: false, item: false}
 		};
 
-		this.getItemColor 	= this.getItemColor.bind(this);
 		this.addItemHandler = this.addItemHandler.bind(this);
 		this.toggleItemEdit = this.toggleItemEdit.bind(this);
-	}
-
-	getItemColor (itemIdx) {
-		var baseH = 212,
-	    baseS = 93,
-	    baseL = 53,
-
-	    stepH = -2.5,
-	    stepS = 1,
-	    stepL = 2.5,
-
-	    maxColorSpan = 5,
-
-	    spanH = maxColorSpan * stepH,
-	    spanS = maxColorSpan * stepS,
-	    spanL = maxColorSpan * stepL;
-
-
-		var o = itemIdx,
-		    n = this.props.items.length,
-		    sH = stepH,
-		    sS = stepS,
-		    sL = stepL;
-
-		if (n > maxColorSpan) {
-		    sH = spanH / n;
-		    sS = spanS / n;
-		    sL = spanL / n;
-		}
-
-		return {
-			backgroundColor : 'hsl('
-		        + (baseH + o * sH) + ','
-		        + Math.min(100, (baseS + o * sS)) + '%,'
-		        + Math.min(100, (baseL + o * sL)) + '%)'
-		};
 	}
 
 	toggleItemEdit(itemId = false) {
@@ -73,21 +37,46 @@ export default class ListContainer extends React.Component {
 		return this.state.edit.item === itemId;
 	}
 
+	isTodoList() {
+		return typeof this.props.match.params.listId !== 'undefined';
+	}
+
 	render() {
 
-		const listItems = [...this.props.items].map((item, index) => {
-			return (
-				<ListItemContainer 
-					key={item.get('id')} 
-					itemStyle={this.getItemColor(index)} 
-					item={item} 
-					actions={this.props.actions}
-					isEditing={this.isEditing(item.get('id'))}
-					toggleItemEdit={this.toggleItemEdit}
-				>
-				</ListItemContainer>
-			)
-		});
+		let listItems = [];
+
+		if (this.isTodoList()) {
+			listItems = [...this.props.items].map((item, index) => {
+				return (
+					<TodoItemContainer 
+						key={item.get('id')} 
+						idx={index}
+						total={this.props.items.size}
+						item={item} 
+						actions={this.props.actions}
+						isEditing={this.isEditing(item.get('id'))}
+						toggleItemEdit={this.toggleItemEdit}
+					>
+					</TodoItemContainer>
+				)
+			});
+		}
+		else {
+			listItems = [...this.props.items].map((item, index) => {
+				return (
+					<ListItemContainer 
+						key={item.get('id')} 
+						idx={index}
+						total={this.props.items.size}
+						item={item} 
+						actions={this.props.actions}
+						isEditing={this.isEditing(item.get('id'))}
+						toggleItemEdit={this.toggleItemEdit}
+					>
+					</ListItemContainer>
+				)
+			});
+		}
 
 		return (
 			<div id="list-wraper">

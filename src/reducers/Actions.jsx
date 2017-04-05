@@ -26,4 +26,4 @@ export const addTodo 	  = (name, listId) => ({
 });
 export const updateTodo   = (id, name) => ({ type: types.UPDATE_TODO, id, name });
 export const completeTodo = id => ({ type: types.COMPLETE_TODO, id });
-export const deleteTodo   = id => ({ type: types.DELETE_ITEM, idList, idItem });
+export const deleteTodo   = id => ({ type: types.DELETE_TODO, id });
