@@ -9,6 +9,7 @@ export default class ListItemContainer extends React.Component {
 		idx: 		React.PropTypes.number.isRequired,
 		total: 		React.PropTypes.number.isRequired,
 		isEditing: 	React.PropTypes.bool.isRequired,
+        isShaded:   React.PropTypes.bool.isRequired,
 		item: 		React.PropTypes.object.isRequired,
 		actions: 	React.PropTypes.object.isRequired
 	};
@@ -106,6 +107,7 @@ export default class ListItemContainer extends React.Component {
 		return (
 			<ListItem
 				isEditing={this.props.isEditing}
+                isShaded={this.props.isShaded}
 				onClick={this.handleClick}
 				onTitleClick={this.handleTitleClick}
 				onBlur={this.handleBlur}

@@ -55,6 +55,7 @@ export default class ListContainer extends React.Component {
 						item={item}
 						actions={this.props.actions}
 						isEditing={this.isEditing(item.get('id'))}
+                        isShaded={this.state.edit.active && this.state.edit.item !== item.get('id')}
 						toggleItemEdit={this.toggleItemEdit}
 					>
 					</TodoItemContainer>
@@ -71,6 +72,7 @@ export default class ListContainer extends React.Component {
 						item={item}
 						actions={this.props.actions}
 						isEditing={this.isEditing(item.get('id'))}
+                        isShaded={this.state.edit.active && this.state.edit.item !== item.get('id')}
 						toggleItemEdit={this.toggleItemEdit}
 					>
 					</ListItemContainer>

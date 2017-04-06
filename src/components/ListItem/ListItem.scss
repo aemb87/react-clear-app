@@ -41,6 +41,10 @@
 		left: 0;
 		right: 0;
 		padding-left: 9px;
+
+        &--edit {
+            display:  block;
+        }
 	}
 
 	&__title {
@@ -50,6 +54,10 @@
 		cursor: default;
 		display: block;
 		min-height: 100%;
+
+        &--edit {
+            display:  none;
+        }
 	}
 
 	&__count {
@@ -84,17 +92,9 @@
 
 	&--edit {
 		opacity: 1 !important;
-
-		.item__title {
-			display:  none;
-		}
-
-		.item__field {
-			display:  block;
-		}
 	}
-	
-	&--fade {
-		opacity: 0;
-	}
+
+    &--shade {
+        opacity: 0.3;
+    }
 }

@@ -7,6 +7,7 @@ export default class TodoItemContainer extends React.Component {
 		idx: 		React.PropTypes.number.isRequired,
 		total: 		React.PropTypes.number.isRequired,
 		isEditing: 	React.PropTypes.bool.isRequired,
+        isShaded:   React.PropTypes.bool.isRequired,
 		item: 		React.PropTypes.object.isRequired,
 		actions: 	React.PropTypes.object.isRequired
 	};
@@ -103,6 +104,7 @@ export default class TodoItemContainer extends React.Component {
 		return (
 			<TodoItem
 				isEditing={this.props.isEditing}
+                isShaded={this.props.isShaded}
 				onTitleClick={this.handleTitleClick}
 				onBlur={this.handleBlur}
 				onDrag={this.handleDrag}

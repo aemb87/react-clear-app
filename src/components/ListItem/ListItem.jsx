@@ -1,11 +1,13 @@
 import React from 'react';
 import Draggable from 'react-draggable';
+import classNames from 'classnames';
 import styles from './listItem.scss';
 
 export default class ListItem extends React.Component {
 
 	static propTypes = {
 		isEditing: 	  React.PropTypes.bool.isRequired,
+        isShaded:     React.PropTypes.bool.isRequired,
 		onClick: 	  React.PropTypes.func.isRequired,
 		onTitleClick: React.PropTypes.func.isRequired,
 		onBlur: 	  React.PropTypes.func.isRequired,
@@ -28,33 +30,27 @@ export default class ListItem extends React.Component {
 		}
 	}
 
-	getItemClass() {
-		const mainClass = 'item';
-		const itemClass = [mainClass];
-
-		if (this.props.isEditing)
-			itemClass.push(mainClass + "--edit");
-
-		if (!this.props.children || this.props.children.length === 0)
-			itemClass.push(mainClass + "--empty");
-
-		return itemClass.join(" ");
-	}
-
-	renderItemCount() {
-
-		const childrenCount = this.props.children ? this.props.children : 0;
-
-		return (
-			<div className="item__count">
-				{childrenCount}
-			</div>
-		);
-	}
-
 	render() {
+
+        const mainClass = classNames({
+            'item': true,
+            'item--edit': this.props.isEditing,
+            'item--shade': this.props.isShaded,
+            'item--empty': false//!this.props.children || this.props.children.length === 0
+        });
+
+        const titleClass = classNames({
+            'item__title': true,
+            'item__title--edit': this.props.isEditing
+        });
+
+        const fieldClass = classNames({
+            'item__field': true,
+            'item__field--edit': this.props.isEditing
+        });
+
 		return (
-			<div className={this.getItemClass()} onClick={this.props.onClick}>
+			<div className={mainClass} onClick={this.props.onClick}>
 				<Draggable
 				  axis="x"
 				  bounds={{left: -62, right: 62}}
@@ -66,15 +62,17 @@ export default class ListItem extends React.Component {
 				>
 					<div className="item__slider" style={this.props.itemStyle}>
 						<div className="item__inner">
-							<span className="item__title" onClick={this.props.onTitleClick}>
+							<span className={titleClass} onClick={this.props.onTitleClick}>
 								<span className="item__text">
 									{this.props.itemName}
 								</span>
 							</span>
-							{this.renderItemCount()}
+							<div className="item__count">
+                                {this.props.children ? this.props.children : 0}
+                            </div>
 							<input
 								name={"list-item-" + this.props.itemId}
-								className="item__field"
+								className={fieldClass}
 								type="text"
 								defaultValue={this.props.itemName}
 								onBlur={this.props.onBlur}

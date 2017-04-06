@@ -8,6 +8,7 @@ export default class TodoItem extends React.Component {
 
 	static propTypes = {
 		isEditing: 	   React.PropTypes.bool.isRequired,
+        isShaded:     React.PropTypes.bool.isRequired,
 		onTitleClick:  React.PropTypes.func.isRequired,
 		onBlur: 	   React.PropTypes.func.isRequired,
 		itemStyle: 	   React.PropTypes.object.isRequired,
@@ -39,6 +40,7 @@ export default class TodoItem extends React.Component {
         const mainClass = classNames({
             'todo-item': true,
             'todo-item--edit': this.props.isEditing,
+            'todo-item--shade': this.props.isShaded,
             'todo-item--empty': !this.props.children || this.props.children.length === 0
         });
 
